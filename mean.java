@@ -1,52 +1,65 @@
-import java.io.*;
 import java.util.*;
-import java.text.*;
-import java.math.*;
-import java.util.regex.*;
+import java.io.*;
 import java.lang.Integer; 
+import java.math.*;
+import java.text.*;
 
-public class mean {
 
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
+class Mean{
+
+    static float toCalculateMean(int arr[],int size){
         int Sum=0;
-        int numCase = scan.nextInt();
-        for(int ab=0;ab<numCase;ab++){
-            int numSeq = scan.nextInt();
-            int arr[]=new int[numSeq];
-            for(int i=0;i<numSeq;i++){
-               arr[i]=scan.nextInt();
-            }
-            for(int j=0;j<numSeq;j++){
-               Sum=Sum+arr[j];
-            }
-            float mean=(float)Sum/numSeq;
-            System.out.println(mean);
-            Arrays.sort(arr);
-            int middle=arr.length/2;
-            if(arr.length%2==1){
-               System.out.println(arr[middle]);
-            }
-            else{
-               double temp=(arr[middle-1]+arr[middle])/2.0;
-               System.out.println(temp);
-            }
-            int x=0,y=0;
-            for(int k=0;k<arr.length;k++){
-                int count=0;
-                for(int l=0;l<arr.length;l++){
-                    if(arr[l]==arr[k])
-                       count++;
-                }
-                if(count>y){
-                    y=count;
-                    x=arr[k];
-                }
-            }
-            System.out.println(x);
+        for(int j=0;j<size;j++){
+            Sum+=arr[j];
+        }
+        return ((float)Sum/size);
+    }
+
+    static double toCalculateMedian(int arr[],int size){
+        Arrays.sort(arr);
+        int mid=arr.length/2;
+        if(arr.length%2==0){
+            double temp=(arr[mid]+arr[mid-1])/2.0;
+            return temp;
+        }
+        else{
+            double temp=arr[mid];
+            return temp;
         }    
-        
-        
+    }
+
+    static void toCalculateMode(int arr[],int size){
+        int comp=0,ab=0;
+        for(int x=0;x<arr.length;x++){
+            int count=0;
+            for(int y=0;y<arr.length;y++){
+                if(arr[x]==arr[y]){
+                    count++;
+                }
+            }
+            if(count>comp){
+                comp=count;
+                ab=arr[x];
+            }
+        }System.out.println(ab);
         
     }
+    
+    
+    public static void main(String args[]){
+        Scanner scan = new Scanner(System.in);
+        int test = scan.nextInt();   //Number of test cases
+        int size = scan.nextInt();   //Size of sequence
+        int arr[] = new int[size];
+        for(int p=0;p<test;p++){
+            for(int i=0;i<size;i++){
+                arr[i] = scan.nextInt();  //Input sequence
+            }
+            float result=toCalculateMean(arr,size);
+            System.out.println(result);
+            double mres=toCalculateMedian(arr,size);
+            System.out.println(mres);
+            toCalculateMode(arr,size);
+        }
+    }  
 }
