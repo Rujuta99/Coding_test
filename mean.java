@@ -5,7 +5,7 @@ import java.math.*;
 import java.text.*;
 
 
-class Mean{
+class mean{
 
     static float toCalculateMean(int arr[],int size){
         int Sum=0;
